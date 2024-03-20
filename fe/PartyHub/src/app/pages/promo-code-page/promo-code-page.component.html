@@ -1,0 +1,59 @@
+<form class="container" [formGroup]="promoCodeForm" id="confetti">
+  <div class="present">
+    <img
+      src="../../../assets/top-box.svg"
+      alt=""
+      class="top-box"
+      [ngClass]="{ 'top-box-open': open }"
+    />
+    <img src="../../../assets/bottom-box.svg" alt="" class="bottom-box" />
+  </div>
+  <div class="filler"></div>
+  <p class="party-text">Your party code</p>
+  <div class="input-copy">
+    <input
+      class="number-input"
+      id="promoCodeInput"
+      type="text"
+      formControlName="promoCode"
+      [ngModel]="promoCode"
+      [ngClass]="{
+        'wrong-input-value':
+          promoCodeForm.get('promoCode')!.invalid && promoCode
+      }"
+      [disabled]="!promoCode"
+    />
+    <mat-icon class="copy-icon" (click)="copyToClipboard()"
+      >content_copy</mat-icon
+    >
+  </div>
+  <p
+    class="input-not-valid-text"
+    *ngIf="
+      promoCode && (promoCodeForm.get('promoCode')?.invalid || promoCode == '')
+    "
+  >
+    Party Code should be 5-9 characters long
+  </p>
+  <button *ngIf="!promoCode" class="btn" (click)="generatePromoCode()">
+    Generate code
+  </button>
+  <button
+    *ngIf="promoCode && open && !changed"
+    class="btn"
+    (click)="editPromoCode()"
+  >
+    Edit code
+  </button>
+  <p
+    class="selected"
+    *ngIf="
+      changed &&
+      !invalid &&
+      !(promoCodeForm.get('promoCode')?.invalid || promoCode == '')
+    "
+  >
+    Your party code has <br />
+    been changed!
+  </p>
+</form>

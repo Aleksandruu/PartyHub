@@ -1,0 +1,96 @@
+.scrollable {
+  height: auto;
+}
+
+.banner-sec {
+  width: 100vw;
+  height: 265px;
+}
+
+.title {
+  color: red;
+}
+
+h2 {
+  color: white;
+  font-size: 24px;
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+.why {
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.small-data {
+  font-size: 20px;
+  font-weight: 400;
+  width: 70vw;
+  padding-left: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.data {
+  font-size: 20px;
+  font-weight: 400;
+  width: 80vw;
+  margin: 0;
+  margin-bottom: 2rem;
+}
+
+.icon-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  width: 350px;
+}
+
+.icon {
+  color: white;
+  width: 3rem;
+  height: 3rem;
+  font-size: 3rem;
+}
+
+.btn {
+  position: fixed;
+  bottom: 6rem;
+}
+
+google-map,
+.map-container {
+  height: 260px !important;
+  width: 100% !important;
+}
+
+.event-details {
+  padding-bottom: 5rem;
+}
+
+.gmnoprint,
+.gm-svpc,
+.gm-control-active,
+.gm-fullscreen-control,
+.gm-style-mtc {
+  display: none !important;
+}
+
+.four-o-four,
+.not-found {
+  color: rgb(140, 140, 140);
+  margin: 0;
+}
+
+.four-o-four {
+  font-size: 130px;
+}
+
+.not-found {
+  font-size: 30px;
+}
+
+google-map {
+  filter: grayscale(100%) invert(100%);
+}

@@ -1,0 +1,25 @@
+<script src="https://js.stripe.com/v3/"></script>
+<div class="container">
+  <h1>Payment</h1>
+  <div class="input-label">
+    <label for="card-holder">Card holder name</label>
+    <input id="card-holder" class="text-input" placeholder="Enter your name" />
+  </div>
+  <div class="card-container">
+    <div class="input-label">
+      <label for="card-number-element">Card number</label>
+      <div id="card-number-element"></div>
+    </div>
+    <div class="small-input-label">
+      <label for="card-expiry-element">Expires</label>
+      <div id="card-expiry-element"></div>
+    </div>
+    <div class="small-input-label">
+      <label for="card-cvc-element">CVV</label>
+      <div id="card-cvc-element"></div>
+    </div>
+  </div>
+  <button *ngIf="priceToPay" class="btn" (click)="onSubmit()">
+    Pay {{ priceToPay }} lei
+  </button>
+</div>

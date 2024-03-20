@@ -1,0 +1,42 @@
+<div class="container" *ngIf="profile | async as profile">
+  <img src="../../../assets/devil.svg" />
+  <h1 class="title">{{ profile.fullName }}</h1>
+  <div class="icons">
+    <mat-icon class="edit" (click)="navigateToEditProfile()">edit</mat-icon>
+    <mat-icon class="edit" (click)="deleteAccount()">delete</mat-icon>
+  </div>
+  <div class="data-container">
+    <div class="profile-data">
+      <p>Email:</p>
+      <p class="data">{{ profile.email }}</p>
+    </div>
+    <div class="profile-data">
+      <p>Age:</p>
+      <p class="data">{{ profile.age }}</p>
+    </div>
+    <div class="profile-data">
+      <p>Party Code:</p>
+      <p class="party-data">{{ profile.promoCode }}</p>
+      <a
+        class="link"
+        *ngIf="!profile.promoCode"
+        (click)="navigateToPromoCodeDetails()"
+        >Create now!</a
+      >
+    </div>
+  </div>
+  <div class="discount-container">
+    <div class="discount-info">
+      <app-discount-bar
+        [discount]="profile.discountForNextTicket"
+      ></app-discount-bar>
+      <mat-icon class="info-icon" (click)="navigateToPromoCodeDetails()"
+        >info</mat-icon
+      >
+    </div>
+    <p class="discount-text">
+      Discount for the <br />
+      next ticket: {{ profile.discountForNextTicket }}%
+    </p>
+  </div>
+</div>

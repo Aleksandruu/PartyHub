@@ -1,0 +1,17 @@
+p {
+  font-size: 20px;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+a {
+  margin-bottom: 10px;
+}
+
+.wrong-input-value {
+  border-color: red;
+}
+
+.p-no-margin {
+  margin-top: 0;
+}

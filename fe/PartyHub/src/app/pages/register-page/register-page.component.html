@@ -1,0 +1,99 @@
+<form class="container" [formGroup]="registerForm">
+  <h1 class="title">Sign up</h1>
+  <div class="input-label">
+    <label for="email">Email</label>
+    <input
+      class="text-input"
+      id="email"
+      type="email"
+      formControlName="email"
+      [ngClass]="{
+        'wrong-input-value':
+          registerForm.get('email')!.invalid &&
+          registerForm.get('email')!.touched
+      }"
+    />
+  </div>
+  <div class="input-label">
+    <label for="fullName">Full Name</label>
+    <input
+      class="text-input"
+      id="fullName"
+      type="text"
+      formControlName="fullName"
+      [ngClass]="{
+        'wrong-input-value':
+          registerForm.get('fullName')!.invalid &&
+          registerForm.get('fullName')!.touched
+      }"
+    />
+  </div>
+  <div class="small-input-label">
+    <label for="age">Age</label>
+    <input
+      class="number-input"
+      id="age"
+      type="number"
+      formControlName="age"
+      [ngClass]="{
+        'wrong-input-value':
+          registerForm.get('age')!.invalid && registerForm.get('age')!.touched
+      }"
+    />
+  </div>
+  <p
+    class="input-not-valid-text"
+    *ngIf="registerForm.get('age')!.invalid && registerForm.get('age')!.touched"
+  >
+    You must be overage to create an account
+  </p>
+  <div class="input-label">
+    <label for="password">Password</label>
+    <input
+      class="text-input"
+      id="password"
+      type="password"
+      formControlName="password"
+      [ngClass]="{
+        'wrong-input-value':
+          registerForm.get('password')!.invalid &&
+          registerForm.get('password')!.touched
+      }"
+      [ngClass]="{ 'wrong-input-value': passwordMissmatch }"
+    />
+  </div>
+  <div class="input-label">
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      class="text-input"
+      id="confirmPassword"
+      type="password"
+      formControlName="confirmPassword"
+      [ngClass]="{
+        'wrong-input-value':
+          registerForm.get('confirmPassword')!.invalid &&
+          registerForm.get('confirmPassword')!.touched
+      }"
+      [ngClass]="{ 'wrong-input-value': passwordMissmatch }"
+    />
+  </div>
+  <p class="input-not-valid-text" *ngIf="passwordMissmatch">
+    Passwords do not match
+  </p>
+  <button
+    *ngIf="!sent"
+    class="btn"
+    (click)="register()"
+    [disabled]="registerForm.invalid"
+  >
+    Register
+  </button>
+  <p *ngIf="sent">
+    You will recive a confirmation <br />
+    email to activate your account!
+  </p>
+  <div>
+    <p>You already have an account?</p>
+    <a class="link" (click)="navigateToLogin()">Sign in</a>
+  </div>
+</form>

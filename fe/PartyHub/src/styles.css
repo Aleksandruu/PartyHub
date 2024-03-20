@@ -1,0 +1,146 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+body {
+  background-color: #1e1e1e; /* Schimbă această valoare cu culoarea dorită */
+  /* Alte stiluri pentru body sau pentru clasă/containerul principal al aplicației */
+}
+
+p,
+h1,
+h2,
+h3 {
+  color: white;
+}
+
+label {
+  color: white;
+  height: 20px;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 20px !important;
+  font-weight: 400;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: calc(100vh - 190px);
+  font-weight: 500;
+  font-size: medium;
+}
+
+.title {
+  color: white;
+  font-weight: bolder;
+}
+
+.text-input {
+  box-sizing: border-box;
+  height: 3rem;
+  width: 18.75rem;
+  background-color: transparent;
+  border-radius: 1rem;
+  outline: none;
+  border: solid 1px rgba(255, 255, 255, 1);
+  color: white;
+  padding: 0 1rem;
+  font-size: 18px;
+}
+
+.number-input {
+  box-sizing: border-box;
+  height: 3rem;
+  width: 11.75rem;
+  background-color: transparent;
+  border-radius: 1rem;
+  outline: none;
+  border: solid 1px rgba(255, 255, 255, 1);
+  color: white;
+  padding: 0 1rem;
+  font-size: 18px;
+  text-align: center;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  color: red;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.btn {
+  box-sizing: border-box;
+  margin: 0.6rem;
+  height: 3.125rem;
+  width: 18.75rem;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 20px;
+}
+
+.input-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.small-input-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 18.75rem;
+  margin-bottom: 1rem;
+}
+
+.wrong-input-value {
+  border-color: #ff0000;
+}
+
+.input-not-valid-text {
+  color: red;
+  width: 18.75rem;
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.data-list {
+  width: 18.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.data-list-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.data-list-row > p {
+  margin: 0.5rem;
+  font-size: 18px;
+  font-weight: 400;
+}

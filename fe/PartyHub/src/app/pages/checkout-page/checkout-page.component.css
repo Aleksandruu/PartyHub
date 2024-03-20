@@ -1,0 +1,14 @@
+h1 {
+  color: white;
+  margin-bottom: 5rem;
+}
+
+.btn {
+  margin-right: 0;
+}
+
+.total > p {
+  color: red;
+  font-size: 20px;
+  font-weight: 500;
+}

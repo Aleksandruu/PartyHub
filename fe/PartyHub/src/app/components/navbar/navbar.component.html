@@ -1,0 +1,19 @@
+<div class="navbar">
+  <button class="navbar-btn" (click)="toggleNavbar()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <img src="../../../assets/logo/logo.svg" class="logo" />
+</div>
+<div class="menu" [ngClass]="{ 'menu-extended': navbarExtend }">
+  <div class="menu-filler"></div>
+  <a (click)="navigateToEvents()">Events</a>
+  <a *ngIf="!isLoggedIn" (click)="navigateToLogin()">Login</a>
+  <a *ngIf="!isLoggedIn" (click)="navigateToRegister()">Register</a>
+  <a *ngIf="isUser" (click)="navigateToPartyCode()">Party Code</a>
+  <a *ngIf="isUser" (click)="navigateToProfile()">Profile</a>
+  <a *ngIf="isAdmin" (click)="navigateToAddEvent()">Add Event</a>
+  <a *ngIf="isAdmin" (click)="navigateToEventsData()">Events Data</a>
+  <a *ngIf="isAdmin" (click)="navigateToAdminPage()">Admin</a>
+  <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+</div>
+<div class="navbar-filler"></div>

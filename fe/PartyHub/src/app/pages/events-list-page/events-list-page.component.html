@@ -1,0 +1,5 @@
+<app-event-item
+  *ngFor="let event of events"
+  [eventItem]="event"
+  (click)="navigateToEventDetailsPage(event.id)"
+></app-event-item>

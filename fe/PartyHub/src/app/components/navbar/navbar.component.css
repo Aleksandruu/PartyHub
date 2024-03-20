@@ -1,0 +1,75 @@
+.navbar {
+  width: 100vw;
+  height: 95px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: black;
+  color: white;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  height: 2rem;
+  width: 7rem;
+  position: relative;
+  top: 1.5rem;
+}
+
+.navbar-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  bottom: 5px;
+  left: 20px;
+}
+
+.navbar-btn > * {
+  height: 30px;
+  width: 30px;
+}
+
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: black;
+  width: 100%;
+  z-index: 0;
+  max-height: 95px;
+  padding: 0 1rem;
+  transition: max-height 0.3s ease-out;
+}
+.menu-filler {
+  height: 95px;
+}
+
+.menu-extended {
+  max-height: 300px;
+  transition: max-height 0.3s ease-in;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.menu a:hover {
+  color: #acacac;
+}
+.navbar-filler {
+  width: 100vw;
+  height: 95px;
+}

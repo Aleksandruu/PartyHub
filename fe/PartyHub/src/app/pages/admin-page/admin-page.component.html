@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>Admin</h1>
+  <h2>Generate invites</h2>
+  <form class="small-input-label" [formGroup]="inviteForm">
+    <label for="invites">Invites</label>
+    <input
+      class="number-input"
+      id="invites"
+      type="number"
+      formControlName="invites"
+    />
+  </form>
+  <button class="btn" (click)="generateInvites()">Generate invites</button>
+
+  <h2>Generate discount</h2>
+  <form [formGroup]="discountForm">
+    <div class="input-label">
+      <label for="event">Event</label>
+      <select
+        formControlName="event"
+        class="text-input"
+        [ngModel]="selectedEvent"
+        (change)="onEventSelected()"
+      >
+        <option *ngFor="let event of events" [value]="event.id" class="option">
+          {{ event.name }} - {{ event.city }}
+        </option>
+      </select>
+    </div>
+    <div class="small-input-label">
+      <label for="value">Value</label>
+      <input
+        class="number-input"
+        id="value"
+        type="number"
+        formControlName="value"
+      />
+    </div>
+  </form>
+  <button class="btn" (click)="generateDiscount()">Generate discount</button>
+  <p>Discount code</p>
+  <div class="text-input">
+    <p>{{ discountCode }}</p>
+  </div>
+</div>

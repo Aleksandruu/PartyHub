@@ -1,0 +1,26 @@
+<div *ngIf="notFound" class="container">
+  <h1 class="four-o-four">404</h1>
+  <h2 class="not-found">Event not found!</h2>
+</div>
+<div class="container scrollable" *ngIf="event">
+  <img *ngIf="photoUrl" [src]="photoUrl" alt="" class="banner-sec" />
+  <h1 class="title">{{ event.name }}</h1>
+  <div class="icon-title">
+    <img src="../../../assets/Time.svg" alt="A clock icon" />
+    <h2>When?</h2>
+  </div>
+  <p class="data small-data">{{ event.date }}</p>
+  <div class="icon-title">
+    <img src="../../../assets/Map.svg" alt="A map icon" />
+    <h2>Where?</h2>
+  </div>
+  <p class="data small-data">{{ event.location }}</p>
+  <google-map [center]="center" [zoom]="zoom">
+    <map-marker [position]="center"></map-marker>
+  </google-map>
+  <div class="icon-title">
+    <h2 class="why">Why?</h2>
+  </div>
+  <p class="data event-details">{{ event.details }}</p>
+  <button class="btn" (click)="navigateToCheckout()">Buy tickets</button>
+</div>

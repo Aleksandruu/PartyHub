@@ -1,0 +1,165 @@
+<form class="container" [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
+  <div class="input-label">
+    <label for="name">Name</label>
+    <input
+      class="text-input"
+      id="name"
+      type="text"
+      formControlName="name"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('name')!.invalid && addEventForm.get('name')!.touched
+      }"
+    />
+  </div>
+  <div class="add-banner">
+    <div class="file-input-label">
+      <label class="banner-label" for="main-banner">Main banner</label>
+      <input
+        type="file"
+        name="main-banner"
+        id="main-banner"
+        class="file-input"
+        formControlName="mainBanner"
+        (change)="onMainBannerChange($event)"
+      />
+    </div>
+    <div class="file-input-label">
+      <label class="banner-label">Secondary</label>
+      <input
+        type="file"
+        name="secondary-banner"
+        id="secondary-banner"
+        class="file-input"
+        formControlName="secondaryBanner"
+        (change)="onSecondaryBannerChange($event)"
+      />
+    </div>
+  </div>
+  <div class="input-label">
+    <label for="city">City</label>
+    <input
+      class="text-input"
+      id="city"
+      type="text"
+      formControlName="city"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('city')!.invalid && addEventForm.get('city')!.touched
+      }"
+    />
+  </div>
+  <div class="input-label">
+    <label for="location">Location</label>
+    <input
+      class="text-input"
+      id="location"
+      type="text"
+      formControlName="location"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('location')!.invalid &&
+          addEventForm.get('location')!.touched
+      }"
+    />
+  </div>
+  <div class="small-input-label">
+    <label for="lat">Lat</label>
+    <input
+      class="number-input"
+      id="lat"
+      type="number"
+      formControlName="lat"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('lat')!.invalid && addEventForm.get('lat')!.touched
+      }"
+    />
+  </div>
+  <div class="small-input-label">
+    <label for="lng">Long</label>
+    <input
+      class="number-input"
+      id="lng"
+      type="number"
+      formControlName="lng"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('lng')!.invalid && addEventForm.get('lng')!.touched
+      }"
+    />
+  </div>
+  <div class="input-label">
+    <label for="date">Date</label>
+    <input
+      class="text-input"
+      id="date"
+      type="date"
+      formControlName="date"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('date')!.invalid && addEventForm.get('date')!.touched
+      }"
+    />
+  </div>
+
+  <div class="input-label">
+    <label for="details">Details</label>
+    <textarea
+      class="text-input big-text-input"
+      id="details"
+      formControlName="details"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('details')!.invalid &&
+          addEventForm.get('details')!.touched
+      }"
+    ></textarea>
+  </div>
+
+  <div class="small-input-label">
+    <label for="price">Price</label>
+    <input
+      class="number-input"
+      id="price"
+      type="number"
+      formControlName="price"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('price')!.invalid &&
+          addEventForm.get('price')!.touched
+      }"
+    />
+  </div>
+
+  <div class="small-input-label">
+    <label for="discount">Discount</label>
+    <input
+      class="number-input"
+      id="discount"
+      type="number"
+      formControlName="discount"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('discount')!.invalid &&
+          addEventForm.get('discount')!.touched
+      }"
+    />
+  </div>
+  <div class="small-input-label">
+    <label for="tickets-number">Tickets</label>
+    <input
+      class="number-input"
+      id="ticketsNumber"
+      type="number"
+      formControlName="ticketsNumber"
+      [ngClass]="{
+        'wrong-input-value':
+          addEventForm.get('ticketsNumber')!.invalid &&
+          addEventForm.get('ticketsNumber')!.touched
+      }"
+    />
+  </div>
+  <button *ngIf="!submited" class="btn" type="submit">Add event</button>
+  <p *ngIf="submited">Request submited!</p>
+</form>

@@ -1,0 +1,53 @@
+<div class="container" *ngIf="event">
+  <h1>Checkout</h1>
+  <form [formGroup]="ticketForm">
+    <div class="input-label" *ngIf="!email">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        class="text-input"
+        formControlName="email"
+      />
+    </div>
+    <div class="small-input-label">
+      <label for="tickets">Tickets</label>
+      <input
+        id="tickets"
+        type="number"
+        class="number-input"
+        formControlName="numberOfTickets"
+      />
+    </div>
+  </form>
+  <form class="input-label" [formGroup]="discountForm">
+    <label for="promo-code">Add Party Code</label>
+    <div class="small-input-label">
+      <input
+        id="promo-code"
+        type="text"
+        class="number-input"
+        formControlName="discountCode"
+      />
+      <button class="btn" (click)="applyPartyCode()">Apply</button>
+    </div>
+  </form>
+  <div class="data-list">
+    <div class="data-list-row">
+      <p>Tickets value:</p>
+      <p>{{ event.price * ticketForm.get("numberOfTickets")!.value }} lei</p>
+    </div>
+    <div class="data-list-row">
+      <p>Discount:</p>
+      <p>{{ discount }} lei</p>
+    </div>
+    <div class="data-list-row total">
+      <p>Total:</p>
+      <p>
+        {{ event.price * ticketForm.get("numberOfTickets")!.value - discount }}
+        lei
+      </p>
+    </div>
+  </div>
+  <button class="btn" (click)="onSubmit()">Pay now</button>
+</div>

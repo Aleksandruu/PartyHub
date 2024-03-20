@@ -1,0 +1,42 @@
+.container {
+  height: auto;
+  margin: 1rem 0;
+}
+
+.big-text-input {
+  height: 100px;
+}
+
+.add-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 310px;
+}
+
+.file-input-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.file-input {
+  background-color: gray;
+  border: 1px solid black;
+  color: white;
+  border-radius: 15px;
+  height: 110px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  text-align: center;
+}
+
+.banner-label {
+  font-size: 16px;
+}

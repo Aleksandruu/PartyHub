@@ -1,0 +1,13 @@
+h1,
+h2 {
+  color: rgb(140, 140, 140);
+  margin: 0;
+}
+
+h1 {
+  font-size: 130px;
+}
+
+h2 {
+  font-size: 30px;
+}

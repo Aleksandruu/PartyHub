@@ -1,0 +1,11 @@
+.white {
+  width: 270px;
+  height: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+.red {
+  height: 10px;
+  background-color: red;
+  border-radius: 5px;
+}

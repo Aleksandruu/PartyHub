@@ -1,0 +1,79 @@
+.party-text {
+  font-size: larger;
+  margin: 1rem;
+}
+
+.present {
+  width: 150px;
+  position: fixed;
+}
+
+.btn {
+  position: fixed;
+  bottom: 100px;
+}
+
+.selected {
+  position: fixed;
+  bottom: 100px;
+  text-align: center;
+}
+
+img {
+  width: 150px;
+  position: fixed;
+}
+@keyframes moveAndRotate {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  25% {
+    transform: translateY(-1rem) rotate(-30deg);
+  }
+  50% {
+    transform: translateY(-1rem) translateX(-1rem) rotate(-30deg);
+  }
+  75% {
+    transform: translateY(-3rem) translateX(-1rem) rotate(-30deg);
+  }
+  100% {
+    transform: translateY(-3rem) rotate(-30deg);
+  }
+}
+
+.top-box {
+  left: calc(50vw - 76px);
+  top: 18rem;
+  width: 152px;
+  z-index: 11;
+  transition: transform 1s ease, top 1s ease, left 1.5s ease, bottom 0.5s ease;
+  animation-fill-mode: forwards; /* Add this line */
+}
+
+.bottom-box {
+  left: calc(50vw - 75px);
+  top: 18rem;
+}
+
+.top-box-open {
+  transform: translateY(-1rem) translateX(-1rem) rotate(-30deg) translateY(2rem);
+  top: -9rem;
+  left: -2rem;
+}
+
+.copy-icon {
+  margin-left: 10px;
+  color: white;
+}
+
+.input-copy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-not-valid-text {
+  margin-top: 1rem;
+  position: fixed;
+  bottom: 20rem;
+}

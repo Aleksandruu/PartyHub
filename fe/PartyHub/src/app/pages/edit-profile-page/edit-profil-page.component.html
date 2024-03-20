@@ -1,0 +1,17 @@
+<form class="container" [formGroup]="editForm" *ngIf="profile">
+  <img src="../../../assets/devil.svg" />
+  <div class="input-label">
+    <label for="fullName">Full Name</label>
+    <input
+      class="text-input"
+      id="fullName"
+      type="text"
+      formControlName="fullName"
+    />
+  </div>
+  <div class="small-input-label">
+    <label for="age">Age</label>
+    <input class="number-input" id="age" type="number" formControlName="age" />
+  </div>
+  <button class="btn" (click)="save()">Save</button>
+</form>
