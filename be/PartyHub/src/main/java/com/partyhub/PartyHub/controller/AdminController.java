@@ -10,6 +10,7 @@ import com.partyhub.PartyHub.entities.Statistics;
 import com.partyhub.PartyHub.entities.Ticket;
 import com.partyhub.PartyHub.mappers.EventMapper;
 import com.partyhub.PartyHub.service.*;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
@@ -35,11 +37,8 @@ public class AdminController {
     private final TicketService ticketService;
     private final EmailSenderService emailSenderService;
     private final DiscountService discountService;
-    private StatisticsService statisticsService;
-
-
-
-
+    private final StatisticsService statisticsService;
+    @Transactional
     @PostMapping("/event")
     public ResponseEntity<Event> addEvent(@Valid @RequestParam("eventData") String eventDataJson,
                                           @RequestParam("mainBanner") MultipartFile mainBannerFile,
@@ -55,9 +54,17 @@ public class AdminController {
             event.setSecondaryBanner(secondaryBanner);
 
             Statistics statistics = new Statistics();
-            event.setStatistics(statistics);
+            statistics.setTicketsSold(0);
+            statistics.setMoneyEarned(BigDecimal.ZERO);
+            statistics.setGeneratedInvites(0);
+            statistics.setTicketBasedAttendees(0);
+            statistics.setInvitationBasedAttendees(0);
 
+            event.setStatistics(statistics);
+            statistics.setEvent(event);
             Event savedEvent = eventService.addEvent(event);
+            this.statisticsService.save(statistics);
+
             return new ResponseEntity<>(savedEvent, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

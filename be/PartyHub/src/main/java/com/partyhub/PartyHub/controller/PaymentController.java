@@ -46,6 +46,7 @@ public class PaymentController {
     @PostMapping("/charge")
     public PaymentResponse chargeCard(@RequestBody ChargeRequest chargeRequest) throws StripeException, IOException, WriterException, MessagingException {
         Stripe.apiKey = apiKey;
+
         float discount = 0;
         if(chargeRequest.getDiscountCode() != ""){
             discount = this.discountService.findByCode(chargeRequest.getDiscountCode()).get().getDiscountValue();
