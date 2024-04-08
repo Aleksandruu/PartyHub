@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { PATHS } from 'src/app/constants/paths';
 import { Router } from '@angular/router';
@@ -24,6 +24,14 @@ export class NavbarComponent {
     );
     this.authentication.isUser.subscribe((value) => (this.isUser = value));
     this.authentication.isAdmin.subscribe((value) => (this.isAdmin = value));
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    if (!clickedElement.closest('.navbar') && this.navbarExtend) {
+      this.closeNavbar();
+    }
   }
 
   logout(): void {

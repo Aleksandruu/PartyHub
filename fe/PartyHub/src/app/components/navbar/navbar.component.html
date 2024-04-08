@@ -2,7 +2,11 @@
   <button class="navbar-btn" (click)="toggleNavbar()">
     <mat-icon>menu</mat-icon>
   </button>
-  <img src="../../../assets/logo/logo.svg" class="logo" />
+  <img
+    src="../../../assets/logo/logo.svg"
+    class="logo"
+    (click)="navigateToEvents()"
+  />
 </div>
 <div class="menu" [ngClass]="{ 'menu-extended': navbarExtend }">
   <div class="menu-filler"></div>
