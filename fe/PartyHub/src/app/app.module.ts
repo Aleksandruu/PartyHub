@@ -36,6 +36,9 @@ import { PaymentDonePageComponent } from './pages/payment-done-page/payment-done
 import { PaymentCancelPageComponent } from './pages/payment-cancel-page/payment-cancel-page.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { AdminEventDetailsPageComponent } from './pages/admin-event-details-page/admin-event-details-page.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { TicketsPageComponent } from './pages/tickets-page/tickets-page.component';
+import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { AdminEventDetailsPageComponent } from './pages/admin-event-details-page
     PaymentCancelPageComponent,
     CheckoutPageComponent,
     AdminEventDetailsPageComponent,
+    TicketComponent,
+    TicketsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +82,7 @@ import { AdminEventDetailsPageComponent } from './pages/admin-event-details-page
     CommonModule,
     GoogleMapsModule,
     FormsModule,
+    QRCodeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

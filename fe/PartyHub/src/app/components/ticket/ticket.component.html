@@ -1,0 +1,11 @@
+<div class="ticket">
+  <div class="dets1">
+    <qrcode [qrdata]="ticket.ticketId"></qrcode>
+  </div>
+  <div class="dets2">
+    <p class="text1">{{ index + 1 }}</p>
+    <p class="text2">{{ ticket.eventName }}</p>
+    <p>{{ ticket.eventLocation }}</p>
+    <p>{{ ticket.eventDate | date : "dd-MM-yyyy" }}</p>
+  </div>
+</div>
