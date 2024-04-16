@@ -17,13 +17,12 @@ public class Statistics {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
     private int ticketsSold;
     private BigDecimal moneyEarned;
     private int generatedInvites;
     private int ticketBasedAttendees;
     private int invitationBasedAttendees;
-    @OneToOne
-    @JoinColumn(name = "event_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 }

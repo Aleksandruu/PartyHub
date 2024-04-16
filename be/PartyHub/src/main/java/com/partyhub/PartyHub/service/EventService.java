@@ -17,5 +17,6 @@ public interface EventService {
     List<EventSummaryDto> getUpcomingEvents();
     Optional<EventStatisticsDTO> getEventStatisticsDTO(UUID eventId);
 
+    void updateTicketsLeft(int tickets, Event event);
 }
 

@@ -7,9 +7,7 @@ import com.partyhub.PartyHub.entities.Statistics;
 import com.partyhub.PartyHub.repository.EventRepository;
 import com.partyhub.PartyHub.service.EventService;
 import com.partyhub.PartyHub.service.StatisticsService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -98,5 +96,10 @@ public class EventServiceImpl implements EventService {
         );
 
         return Optional.of(dto);
+    }
+    @Override
+    public void updateTicketsLeft(int tickets, Event event) {
+        event.setTicketsLeft(event.getTicketsLeft() - tickets);
+        this.addEvent(event);
     }
 }
