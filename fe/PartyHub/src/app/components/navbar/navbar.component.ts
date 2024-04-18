@@ -83,6 +83,11 @@ export class NavbarComponent {
     this.navbarExtend = !this.navbarExtend;
   }
 
+  navigateToTicketsPage(): void {
+    this.router.navigate([PATHS.TICKETSPAGE]);
+    this.closeNavbar();
+  }
+
   closeNavbar(): void {
     this.navbarExtend = false;
   }

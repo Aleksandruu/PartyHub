@@ -1,1 +1,8 @@
-<p>tickets-page works!</p>
+<div class="container">
+  <app-ticket
+    *ngFor="let ticket of tickets; let i = index"
+    [ticket]="ticket"
+    [index]="i"
+  >
+  </app-ticket>
+</div>

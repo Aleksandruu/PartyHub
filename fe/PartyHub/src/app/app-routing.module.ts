@@ -27,6 +27,7 @@ import { PaymentCancelPageComponent } from './pages/payment-cancel-page/payment-
 import { PaymentDonePageComponent } from './pages/payment-done-page/payment-done-page.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { AdminEventDetailsPageComponent } from './pages/admin-event-details-page/admin-event-details-page.component';
+import { TicketsPageComponent } from './pages/tickets-page/tickets-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: PATHS.EVENTS, pathMatch: 'full' },
@@ -128,6 +129,11 @@ const routes: Routes = [
     canActivate: [adminGuard],
   },
   {
+    component: TicketsPageComponent,
+    path: PATHS.TICKETSPAGE,
+    canActivate: [userGuard],
+  },
+  {
     component: NotFoundPageComponent,
     path: '**',
   },
@@ -137,4 +143,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
