@@ -44,17 +44,17 @@ public class AuthController {
     private final ProfileService profileService;
 
     @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto){
+    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                loginDto.getEmail(),
-                loginDto.getPassword()));
+                        loginDto.getEmail(),
+                        loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
 
-        User user = userService.findByEmail(loginDto.getEmail()).orElse(null);
-        if(user!=null){
-            if(!user.isVerified()){
+        User user = userService.findByEmail(loginDto.getEmail());
+        if (user != null) {
+            if (!user.isVerified()) {
                 AuthResponseDto responseDto = new AuthResponseDto(null);
                 responseDto.setActivated(false);
                 return new ResponseEntity<>(responseDto, HttpStatus.UNAUTHORIZED);
@@ -65,48 +65,44 @@ public class AuthController {
 
     @GetMapping("/verify/{token}")
     public ResponseEntity<ApiResponse> verify(@PathVariable UUID token) {
-        Optional<User> optionalUser = this.userService.findByVerificationToken(token);
         try {
-            if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                if (!user.isVerified()) {
-                    user.setVerified(true);
-                    this.userService.save(user);
-                    return ResponseEntity.ok(new ApiResponse(true, "Account activated!"));
-                } else {
-                    throw new UserAlreadyVerifiedException("User already verified!");
-                }
+            User user = this.userService.findByVerificationToken(token);
+
+            if (!user.isVerified()) {
+                user.setVerified(true);
+                this.userService.save(user);
+                return ResponseEntity.ok(new ApiResponse(true, "Account activated!"));
             } else {
-                throw new UserNotFoundException("User not found!");
+                throw new UserAlreadyVerifiedException("User already verified!");
             }
-        }catch ( UserAlreadyVerifiedException e){
+
+        } catch (UserAlreadyVerifiedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(false, "User already verified!"));
-        }catch ( UserNotFoundException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse( false,"User not found!"));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(false, "User not found!"));
         }
     }
 
     @GetMapping("reset-password/{email}")
     public ResponseEntity<ApiResponse> sendResetPasswordEmail(@PathVariable String email) {
-        try{
-        String clientUrl = "http://localhost:4200";
+        try {
+            String clientUrl = "http://localhost:4200";
 
-        User user = userService.findByEmail(email).orElseThrow(()->new UserNotFoundException("User not found!"));
-        user.setVerificationToken(UUID.randomUUID());
-        this.userService.save(user);
-        this.emailSenderService.sendEmail(email, "PartyHub", clientUrl + "/reset-password/" + user.getVerificationToken());
+            User user = userService.findByEmail(email);
+            user.setVerificationToken(UUID.randomUUID());
+            this.userService.save(user);
+            this.emailSenderService.sendEmail(email, "PartyHub", clientUrl + "/reset-password/" + user.getVerificationToken());
 
-        return new ResponseEntity<>(new ApiResponse(true, "Email sent!"), HttpStatus.OK);
-        }catch (UserNotFoundException e){
-            return new ResponseEntity<>(new ApiResponse(false, "User not found!") ,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ApiResponse(true, "Email sent!"), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(new ApiResponse(false, "User not found!"), HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("reset-password/{token}")
-    public ResponseEntity<ApiResponse> resetPassword(@PathVariable UUID token,@RequestBody String newPassword) {
+    public ResponseEntity<ApiResponse> resetPassword(@PathVariable UUID token, @RequestBody String newPassword) {
         try {
-            Optional<User> optionalUser = this.userService.findByVerificationToken(token);
-            User user = optionalUser.orElseThrow(()-> new UserNotFoundException("user not found"));
+            User user = this.userService.findByVerificationToken(token);
             profileService.resetPassword(user.getEmail(), newPassword);
             return ResponseEntity.ok(new ApiResponse(true, "Password reset successfully!"));
         } catch (UserNotFoundException e) {
@@ -118,7 +114,7 @@ public class AuthController {
 
     @PostMapping("register")
     @Transactional
-    public ResponseEntity<ApiResponse> register(@Valid @RequestBody RegisterDto registerDto){
+    public ResponseEntity<ApiResponse> register(@Valid @RequestBody RegisterDto registerDto) {
         try {
             String clientUrl = "http://localhost:4200";
 
@@ -143,9 +139,9 @@ public class AuthController {
             this.emailSenderService.sendEmail(registerDto.getEmail(), "PartyHub", clientUrl + "/verify/" + user.getVerificationToken());
 
             return new ResponseEntity<>(new ApiResponse(true, "User registration successful"), HttpStatus.OK);
-        }catch (EmailAlreadyUsedException e){
+        } catch (EmailAlreadyUsedException e) {
             return new ResponseEntity<>(new ApiResponse(false, "Email already used!"), HttpStatus.BAD_REQUEST);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(new ApiResponse(false, "Role not found!"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3d704a2a-39dc-4320-8910-cf22b657f5b8" name="Changes" comment="fixed statistics logic and done some refactoring" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "last_opened_file_path": "C:/Users/misch/OneDrive/Desktop/PartyHub fe+be/PartyHub/be/PartyHub/src/main/java/com/partyhub/PartyHub/controller",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "terminal"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.partyhub.PartyHub.service.impl" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\misch\OneDrive\Desktop\PartyHub fe+be\PartyHub\be\PartyHub\src\main\java\com\partyhub\PartyHub\controller" />
+      <recent name="C:\Users\misch\OneDrive\Desktop\PartyHub fe+be\PartyHub\be\PartyHub\src\main\resources\db.migration" />
+      <recent name="C:\Users\misch\OneDrive\Desktop\PartyHub fe+be\PartyHub\be\PartyHub\src\main\java\com\partyhub\PartyHub\exceptions" />
+      <recent name="C:\Users\misch\OneDrive\Desktop\PartyHub fe+be\PartyHub\be\PartyHub\src\main\java\com\partyhub\PartyHub\service" />
+      <recent name="C:\Users\misch\OneDrive\Desktop\PartyHub fe+be\PartyHub\be\PartyHub\src\main\java\com\partyhub\PartyHub\service\impl" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\misch\OneDrive\Desktop\PartyHub fe+be\PartyHub\be\PartyHub\src\main\java\com\partyhub\PartyHub\util" />
+      <recent name="C:\Users\misch\OneDrive\Desktop\PartyHub fe+be\PartyHub\be\PartyHub\src\main\java\com\partyhub\PartyHub\entities" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="PartyHubApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="PartyHub" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.partyhub.PartyHub.PartyHubApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.partyhub.PartyHub.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.PartyHubApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

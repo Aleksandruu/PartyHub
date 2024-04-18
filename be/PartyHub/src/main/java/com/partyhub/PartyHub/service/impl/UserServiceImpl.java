@@ -1,16 +1,13 @@
 package com.partyhub.PartyHub.service.impl;
 
-import com.partyhub.PartyHub.entities.Event;
 import com.partyhub.PartyHub.entities.User;
-import com.partyhub.PartyHub.entities.UserDetails;
+import com.partyhub.PartyHub.exceptions.UserNotFoundException;
 import com.partyhub.PartyHub.repository.UserRepository;
-import com.partyhub.PartyHub.service.EventService;
 import com.partyhub.PartyHub.service.UserService;
 import com.partyhub.PartyHub.util.PromoCodeGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,16 +15,16 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final EventService eventService;
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found with email: " + email));
     }
-  
     @Override
-    public Optional<User> findByVerificationToken(UUID verificationToken) {
-        return userRepository.findByVerificationToken(verificationToken);
+    public User findByVerificationToken(UUID verificationToken) {
+        return userRepository.findByVerificationToken(verificationToken)
+                .orElseThrow(() -> new UserNotFoundException("User not found with verification token: " + verificationToken));
     }
   
     @Override
@@ -76,25 +73,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByPromoCode(promoCode).isPresent();
     }
     @Override
-    public Optional<User> findByPromoCode(String promoCode) {
-        return userRepository.findByPromoCode(promoCode);
+    public User findByPromoCode(String promoCode) {
+        return userRepository.findByPromoCode(promoCode)
+                .orElseThrow(() -> new UserNotFoundException("User not found with promo code: " + promoCode));
     }
 
-    public void increaseDiscountForNextTicket(String email, UUID eventId) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + email));
 
-        Event event = eventService.getEventById(eventId)
-                .orElseThrow(() -> new IllegalArgumentException("Event not found with ID: " + eventId));
-
-        UserDetails userDetails = user.getUserDetails();
-        if (userDetails != null) {
-            int discountAsInt = (int) event.getDiscount();
-            userDetails.setDiscountForNextTicket(discountAsInt);
-            userRepository.save(user);
-        } else {
-            throw new IllegalStateException("UserDetails not found for user with email: " + email);
-        }
-    }
 }
 

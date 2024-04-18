@@ -2,7 +2,6 @@ package com.partyhub.PartyHub.service;
 
 import com.partyhub.PartyHub.entities.UserDetails;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public interface UserDetailsService {
@@ -10,6 +9,6 @@ public interface UserDetailsService {
 
     UserDetails create(int age, String fullName);
 
-    Optional<UserDetails> findById(UUID id);
+    UserDetails findById(UUID id);
     void delete(UserDetails userDetails);
 }
