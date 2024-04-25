@@ -21,5 +21,7 @@ export const PATHS = {
   PAYMENT: 'payment',
   PAYMENTCANCEL: 'payment-cancel',
   PAYMENTSUCCESS: 'payment-success',
-  TICKETSPAGE: 'tickets-page'
+  TICKETSPAGE: 'tickets-page',
+  TERMS: 'terms-and-conditions',
+  POLICY: 'privacy-policy'
 };

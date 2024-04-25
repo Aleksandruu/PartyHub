@@ -28,6 +28,8 @@ import { PaymentDonePageComponent } from './pages/payment-done-page/payment-done
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { AdminEventDetailsPageComponent } from './pages/admin-event-details-page/admin-event-details-page.component';
 import { TicketsPageComponent } from './pages/tickets-page/tickets-page.component';
+import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page/terms-and-conditions-page.component';
+import { PrivacyPolicyPageComponent } from './pages/privacy-policy-page/privacy-policy-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: PATHS.EVENTS, pathMatch: 'full' },
@@ -132,6 +134,14 @@ const routes: Routes = [
     component: TicketsPageComponent,
     path: PATHS.TICKETSPAGE,
     canActivate: [userGuard],
+  },
+  {
+    component: TermsAndConditionsPageComponent,
+    path: PATHS.TERMS
+  },
+  {
+    component: PrivacyPolicyPageComponent,
+    path: PATHS.POLICY
   },
   {
     component: NotFoundPageComponent,
