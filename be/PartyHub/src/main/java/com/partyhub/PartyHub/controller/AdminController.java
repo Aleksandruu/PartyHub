@@ -8,12 +8,11 @@ import com.partyhub.PartyHub.entities.Discount;
 import com.partyhub.PartyHub.entities.Event;
 import com.partyhub.PartyHub.entities.Statistics;
 import com.partyhub.PartyHub.entities.Ticket;
+import com.partyhub.PartyHub.exceptions.EventNotFoundException;
 import com.partyhub.PartyHub.mappers.EventMapper;
 import com.partyhub.PartyHub.service.*;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +37,10 @@ public class AdminController {
     private final EmailSenderService emailSenderService;
     private final DiscountService discountService;
     private final StatisticsService statisticsService;
-    @Transactional
+
+
+
+
     @PostMapping("/event")
     public ResponseEntity<Event> addEvent(@Valid @RequestParam("eventData") String eventDataJson,
                                           @RequestParam("mainBanner") MultipartFile mainBannerFile,
@@ -62,9 +64,8 @@ public class AdminController {
 
             event.setStatistics(statistics);
             statistics.setEvent(event);
-            Event savedEvent = eventService.addEvent(event);
-            this.statisticsService.save(statistics);
 
+            Event savedEvent = eventService.addEvent(event);
             return new ResponseEntity<>(savedEvent, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -83,19 +84,35 @@ public class AdminController {
     }
 
     @PutMapping("event/{id}")
-    public ResponseEntity<ApiResponse> editEvent(@PathVariable UUID id, @RequestBody EventDto eventDto) {
+    public ResponseEntity<Event> editEvent(@PathVariable UUID id,
+                                           @Valid @RequestParam("eventData") String eventDataJson,
+                                           @RequestParam(name = "mainBanner", required = false) MultipartFile mainBannerFile,
+                                           @RequestParam(name = "secondaryBanner", required = false) MultipartFile secondaryBannerFile) {
         try {
+            EventDto eventDto = objectMapper.readValue(eventDataJson, EventDto.class);
             Event event = eventMapper.dtoToEvent(eventDto);
+
+            if (mainBannerFile != null) {
+                byte[] mainBanner = processBannerFile(mainBannerFile);
+                event.setMainBanner(mainBanner);
+            }
+
+            if (secondaryBannerFile != null) {
+                byte[] secondaryBanner = processBannerFile(secondaryBannerFile);
+                event.setSecondaryBanner(secondaryBanner);
+            }
+
             Event updatedEvent = eventService.editEvent(id, event);
             if (updatedEvent != null) {
-                return new ResponseEntity<>(new ApiResponse(true, "Event updated!"), HttpStatus.OK);
+                return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(new ApiResponse(false, "Event not found!"), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "Event not updated!"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("/events")
     public ResponseEntity<List<EventSummaryDto>> getAllEventSummaries() {
@@ -103,14 +120,16 @@ public class AdminController {
         return new ResponseEntity<>(eventSummaries, HttpStatus.OK);
     }
 
-    @PostMapping("/events/{eventId}/invites")
-    public ResponseEntity<?> generateAndSendInvites(@PathVariable UUID eventId, @RequestBody Integer numberOfInvites) {
-        Event event = eventService.getEventById(eventId)
-                .orElseThrow(() -> new RuntimeException("Event not found with ID: " + eventId));
+    @PostMapping("/invites/{eventId}")
+    public ResponseEntity<?> generateAndSendInvites(@PathVariable UUID eventId,
+                                                    @RequestBody Integer numberOfInvites,
+                                                    Principal principal) {
+        String userEmail = principal.getName();
+        Event event = eventService.getEventById(eventId);
 
         List<Ticket> invites = new ArrayList<>();
         for (int i = 0; i < numberOfInvites; i++) {
-            Ticket invite = new Ticket(UUID.randomUUID(),null, 0, "invite", event);
+            Ticket invite = new Ticket(UUID.randomUUID(),null, "invite", userEmail,event);
             invites.add(ticketService.saveTicket(invite));
         }
 
@@ -135,11 +154,6 @@ public class AdminController {
     public ResponseEntity<ApiResponse> createDiscount(@RequestParam UUID eventId,
                                                       @RequestParam int discountValue) {
         try {
-            Optional<Event> eventOptional = eventService.getEventById(eventId);
-            if (eventOptional.isEmpty()) {
-                return new ResponseEntity<>(new ApiResponse(false, "Event not found!"), HttpStatus.NOT_FOUND);
-            }
-
 
             String code = generateRandomCode();
 
@@ -151,6 +165,9 @@ public class AdminController {
             discountService.saveDiscount(discount);
 
             return new ResponseEntity<>(new ApiResponse(true, code), HttpStatus.CREATED);
+        }catch(EventNotFoundException e) {
+            return new ResponseEntity<>(new ApiResponse(false, "Event not found!"), HttpStatus.NOT_FOUND);
+
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "Discount not created!"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -183,12 +200,12 @@ public class AdminController {
         return new ResponseEntity<>(upcomingEvents, HttpStatus.OK);
     }
 
-    @GetMapping("/event/{eventId}/data")
+    @GetMapping("/event-statistics/{eventId}")
     public ResponseEntity<?> getEventData(@PathVariable UUID eventId) {
         Optional<EventStatisticsDTO> eventStatisticsDTO = eventService.getEventStatisticsDTO(eventId);
 
         return eventStatisticsDTO
-                .map(dto -> ResponseEntity.ok(dto))
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

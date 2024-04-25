@@ -1,3 +1,11 @@
 .option {
   background-color: #1e1e1e;
 }
+
+.container {
+  height: auto;
+}
+
+.discount-code {
+  margin-bottom: 1rem;
+}

@@ -24,6 +24,7 @@ export class AdminPageComponent {
       .subscribe((events) => (this.events = events));
 
     this.inviteForm = new FormGroup({
+      event: new FormControl(),
       invites: new FormControl(),
     });
 
@@ -42,7 +43,8 @@ export class AdminPageComponent {
 
   generateInvites() {
     const invites = this.inviteForm.value.invites;
-    this.eventService.generateInvites(invites).subscribe();
+    const eventId = this.inviteForm.value.event;
+    this.eventService.generateInvites(invites, eventId).subscribe();
   }
 
   generateDiscount() {
