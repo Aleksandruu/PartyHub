@@ -3,6 +3,10 @@
   <button class="btn" (click)="goToEvent()">Check this out!</button>
 </div>
 <div class="container" *ngIf="!event">
+  <img src="../../../assets/spinner.svg" alt="devil icon" class="spinner" />
+</div>
+<div class="container no-event" *ngIf="noEvent">
+  <img src="../../../assets/traffic_cone.svg" alt="traffic cone" />
   <p>No events yet!</p>
   <p>Come back later!</p>
 </div>

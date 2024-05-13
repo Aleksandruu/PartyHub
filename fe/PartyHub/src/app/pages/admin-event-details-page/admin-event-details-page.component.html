@@ -1,45 +1,47 @@
-<div class="container">
+<div class="container" *ngIf="eventStatistics">
   <h1>Event Details</h1>
   <div class="data-list">
     <div class="data-list-row">
       <p>Name:</p>
-      <p></p>
+      <p>{{ eventStatistics.name }}</p>
     </div>
     <div class="data-list-row">
       <p>Location:</p>
-      <p></p>
+      <p>{{ eventStatistics.location }}</p>
     </div>
     <div class="data-list-row">
       <p>Date:</p>
-      <p></p>
+      <p>{{ eventStatistics.date | date }}</p>
+      <!-- Assuming you want to format the date -->
     </div>
     <div class="data-list-row">
       <p>Tickets sold:</p>
-      <p></p>
+      <p>{{ eventStatistics.ticketsSold }}</p>
     </div>
     <div class="data-list-row">
       <p>Money earned:</p>
-      <p></p>
+      <p>{{ eventStatistics.moneyEarned }}</p>
     </div>
     <div class="data-list-row">
       <p>Generated invites:</p>
-      <p></p>
+      <p>{{ eventStatistics.generatedInvites }}</p>
     </div>
     <div class="data-list-row">
       <p>Ticket-based attendees:</p>
-      <p></p>
+      <p>{{ eventStatistics.ticketBasedAttendees }}</p>
     </div>
     <div class="data-list-row">
       <p>Invitation-based attendees:</p>
-      <p></p>
+      <p>{{ eventStatistics.invitationBasedAttendees }}</p>
     </div>
     <div class="data-list-row">
       <p>Price/ticket:</p>
-      <p></p>
+      <p>{{ eventStatistics.price }}</p>
     </div>
     <div class="data-list-row">
       <p>Discount:</p>
-      <p></p>
+      <p>{{ eventStatistics.discount }}</p>
     </div>
   </div>
+  <button class="btn" (click)="navigateToEditEvent()">Edit event</button>
 </div>

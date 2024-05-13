@@ -1,5 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import party from "party-js";
+import { PATHS } from 'src/app/constants/paths';
 
 @Component({
   selector: 'app-payment-done-page',
@@ -7,6 +9,8 @@ import party from "party-js";
   styleUrl: './payment-done-page.component.css',
 })
 export class PaymentDonePageComponent implements AfterViewInit {
+  constructor(private router: Router) { }
+
   ngAfterViewInit() {
     this.confetti();
   }
@@ -17,6 +21,9 @@ export class PaymentDonePageComponent implements AfterViewInit {
         count: party.variation.range(100, 200),
       });
     }
+  }
+  navigateToEvents(): void {
+    this.router.navigate([PATHS.EVENTS]);
   }
 
 }

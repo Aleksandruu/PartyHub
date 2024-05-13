@@ -1,0 +1,38 @@
+.btn {
+  position: fixed;
+  bottom: 4rem;
+}
+
+.camera {
+  bottom: 5rem;
+}
+
+.ticket-valid {
+  background-color: green;
+}
+
+.ticket-invalid {
+  background-color: rgb(255, 162, 0);
+}
+
+.is-not-ticket {
+  background-color: red;
+}
+
+.validation {
+  position: fixed;
+  left: 0;
+  top: 95px;
+}
+
+.close-btn {
+  position: fixed;
+  bottom: 5rem;
+  background-color: white;
+  color: black;
+}
+
+.scan-text {
+  font-size: 20px;
+  text-align: center;
+}

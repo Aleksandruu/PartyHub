@@ -1,6 +1,7 @@
 .card-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 75vw;
 }
 #card-number-element,
@@ -20,11 +21,11 @@
 }
 
 #card-expiry-element {
-  width: 4rem;
+  width: 5rem;
 }
 
 #card-cvc-element {
-  width: 2.5rem;
+  width: 3rem;
 }
 
 .card-row {

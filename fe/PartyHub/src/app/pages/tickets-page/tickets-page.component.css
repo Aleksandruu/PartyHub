@@ -1,5 +1,61 @@
-.container {
-  height: auto;
+.container1 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  font-weight: 500;
+  font-size: medium;
   min-height: calc(100vh - 190px);
+  height: auto;
   justify-content: flex-start;
+}
+/* large-qr-code.component.css */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  transform: scale(1.5) !important;
+}
+
+.modal qrcode.large {
+  width: 20rem;
+  height: 20rem;
+}
+
+.modal {
+  background-color: black;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.modal qrcode {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.no-event {
+  font-size: 30px;
+  text-align: center;
+  text-wrap: wrap;
+  font-weight: 600;
+}
+
+.no-event > p {
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.no-event > img {
+  width: 100px;
+  margin-bottom: 2rem;
 }

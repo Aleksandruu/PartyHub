@@ -15,10 +15,11 @@
   <a *ngIf="!isLoggedIn" (click)="navigateToRegister()">Register</a>
   <a *ngIf="isUser" (click)="navigateToPartyCode()">Party Code</a>
   <a *ngIf="isUser" (click)="navigateToProfile()">Profile</a>
-  <a *ngIf="isUser" (click)="navigateToTicketsPage()">Tickets</a>
+  <a *ngIf="isUser" (click)="navigateToTicketsPage()">My Tickets</a>
   <a *ngIf="isAdmin" (click)="navigateToAddEvent()">Add Event</a>
   <a *ngIf="isAdmin" (click)="navigateToEventsData()">Events Data</a>
   <a *ngIf="isAdmin" (click)="navigateToAdminPage()">Admin</a>
+  <a *ngIf="isScanner" (click)="navigateToScan()">Scan</a>
   <a (click)="navigateToTermsAndConds()">Terms & Conditions</a>
   <a (click)="navigateToPrivacyPolicy()">Privacy Policy</a>
   <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>

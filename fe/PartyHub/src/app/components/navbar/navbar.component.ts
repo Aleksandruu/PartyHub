@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { PATHS } from 'src/app/constants/paths';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ export class NavbarComponent {
   isLoggedIn = false;
   isUser = false;
   isAdmin = false;
+  isScanner = false;
 
   constructor(
     private router: Router,
@@ -24,6 +25,9 @@ export class NavbarComponent {
     );
     this.authentication.isUser.subscribe((value) => (this.isUser = value));
     this.authentication.isAdmin.subscribe((value) => (this.isAdmin = value));
+    this.authentication.isScanner.subscribe(
+      (value) => (this.isScanner = value)
+    );
   }
 
   @HostListener('document:click', ['$event'])
@@ -36,7 +40,7 @@ export class NavbarComponent {
 
   logout(): void {
     this.authentication.logout();
-    this.navigateToLogin();
+    this.navigateToEvents();
   }
 
   navigateToLogin(): void {
@@ -59,6 +63,11 @@ export class NavbarComponent {
     this.closeNavbar();
   }
 
+  navigateToTicketsPage(): void {
+    this.router.navigate([PATHS.TICKETSPAGE]);
+    this.closeNavbar();
+  }
+
   navigateToAddEvent(): void {
     this.router.navigate([PATHS.ADDEVENT]);
     this.closeNavbar();
@@ -66,6 +75,11 @@ export class NavbarComponent {
 
   navigateToEventsData(): void {
     this.router.navigate([PATHS.EVENTLIST]);
+    this.closeNavbar();
+  }
+
+  navigateToScan(): void {
+    this.router.navigate([PATHS.SCAN]);
     this.closeNavbar();
   }
 
@@ -79,23 +93,19 @@ export class NavbarComponent {
     this.closeNavbar();
   }
 
-  toggleNavbar(): void {
-    this.navbarExtend = !this.navbarExtend;
-  }
-
-  navigateToTicketsPage(): void {
-    this.router.navigate([PATHS.TICKETSPAGE]);
-    this.closeNavbar();
-  }
-
   navigateToTermsAndConds(): void {
     this.router.navigate([PATHS.TERMS]);
     this.closeNavbar();
   }
 
+
   navigateToPrivacyPolicy(): void {
     this.router.navigate([PATHS.POLICY]);
     this.closeNavbar();
+  }
+
+  toggleNavbar(): void {
+    this.navbarExtend = !this.navbarExtend;
   }
 
   closeNavbar(): void {

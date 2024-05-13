@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authentication.setSubjects();
   }
+  output!: any;
 
   title = 'PartyHub';
 }

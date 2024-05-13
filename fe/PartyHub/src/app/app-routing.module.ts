@@ -11,7 +11,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ProfilPageComponent } from './pages/profile-page/profil-page.component';
 import { PromoCodePageComponent } from './pages/promo-code-page/promo-code-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
-import { ScanTicketsPageComponent } from './pages/scan-tickets-page/scan-tickets-page.component';
+import { ScanTicketPageComponent } from './pages/scan-ticket-page/scan-ticket-page.component';
 import { PromoCodeDetailsComponent } from './pages/promo-code-details/promo-code-details.component';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { adminGuard } from './guards/admin.guard';
@@ -70,6 +70,11 @@ const routes: Routes = [
     canActivate: [userGuard],
   },
   {
+    component: TicketsPageComponent,
+    path: PATHS.TICKETSPAGE,
+    canActivate: [userGuard],
+  },
+  {
     component: PromoCodePageComponent,
     path: PATHS.PROMOCODE,
     canActivate: [userGuard],
@@ -85,14 +90,12 @@ const routes: Routes = [
     canActivate: [logoutGuard],
   },
   {
-    component: ScanTicketsPageComponent,
-    path: PATHS.SCANTICKETS,
-    canActivate: [scannerGuard],
+    component: ScanTicketPageComponent,
+    path: PATHS.SCAN,
   },
   {
     component: PromoCodeDetailsComponent,
     path: PATHS.PROMOCODEDETAILS,
-    canActivate: [userGuard],
   },
   {
     component: CheckoutPageComponent,
@@ -131,17 +134,12 @@ const routes: Routes = [
     canActivate: [adminGuard],
   },
   {
-    component: TicketsPageComponent,
-    path: PATHS.TICKETSPAGE,
-    canActivate: [userGuard],
-  },
-  {
     component: TermsAndConditionsPageComponent,
-    path: PATHS.TERMS
+    path: PATHS.TERMS,
   },
   {
     component: PrivacyPolicyPageComponent,
-    path: PATHS.POLICY
+    path: PATHS.POLICY,
   },
   {
     component: NotFoundPageComponent,
@@ -153,4 +151,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

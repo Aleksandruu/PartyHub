@@ -10,7 +10,7 @@ import { BuyTicketPageComponent } from './pages/buy-ticket-page/buy-ticket-page.
 import { ProfilPageComponent } from './pages/profile-page/profil-page.component';
 import { EditProfilPageComponent } from './pages/edit-profile-page/edit-profil-page.component';
 import { PromoCodePageComponent } from './pages/promo-code-page/promo-code-page.component';
-import { ScanTicketsPageComponent } from './pages/scan-tickets-page/scan-tickets-page.component';
+import { ScanTicketPageComponent } from './pages/scan-ticket-page/scan-ticket-page.component';
 import { AddEditPageComponent } from './pages/add-edit-page/add-edit-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -36,9 +36,10 @@ import { PaymentDonePageComponent } from './pages/payment-done-page/payment-done
 import { PaymentCancelPageComponent } from './pages/payment-cancel-page/payment-cancel-page.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { AdminEventDetailsPageComponent } from './pages/admin-event-details-page/admin-event-details-page.component';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { TicketsPageComponent } from './pages/tickets-page/tickets-page.component';
-import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
     ProfilPageComponent,
     EditProfilPageComponent,
     PromoCodePageComponent,
-    ScanTicketsPageComponent,
+    ScanTicketPageComponent,
     ForgotPasswordPageComponent,
     AddEditPageComponent,
     AdminPageComponent,
@@ -82,7 +83,9 @@ import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
     CommonModule,
     GoogleMapsModule,
     FormsModule,
-    QRCodeModule
+    NgxScannerQrcodeModule,
+    QRCodeModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -5,22 +5,34 @@
 <div class="container scrollable" *ngIf="event">
   <img *ngIf="photoUrl" [src]="photoUrl" alt="" class="banner-sec" />
   <h1 class="title">{{ event.name }}</h1>
-  <div class="icon-title">
-    <img src="../../../assets/Time.svg" alt="A clock icon" />
-    <h2>When?</h2>
+  <div>
+    <div class="icon-title">
+      <img src="../../../assets/Time.svg" alt="A clock icon" />
+      <h2>When?</h2>
+    </div>
+    <p class="data small-data">{{ event.date }}</p>
   </div>
-  <p class="data small-data">{{ event.date }}</p>
-  <div class="icon-title">
-    <img src="../../../assets/Map.svg" alt="A map icon" />
-    <h2>Where?</h2>
+  <div>
+    <div class="icon-title">
+      <img src="../../../assets/Map.svg" alt="A map icon" />
+      <h2>Where?</h2>
+    </div>
+    <p class="data small-data">{{ event.location }}</p>
   </div>
-  <p class="data small-data">{{ event.location }}</p>
   <google-map [center]="center" [zoom]="zoom">
     <map-marker [position]="center"></map-marker>
   </google-map>
-  <div class="icon-title">
-    <h2 class="why">Why?</h2>
+  <div>
+    <div class="icon-title">
+      <h2 class="why">Why?</h2>
+    </div>
+    <p class="data event-details">{{ event.details }}</p>
   </div>
-  <p class="data event-details">{{ event.details }}</p>
-  <button class="btn" (click)="navigateToCheckout()">Buy tickets</button>
+  <button class="btn" (click)="navigateToCheckout()" *ngIf="!soldOut">
+    Buy tickets
+  </button>
+  <button class="btn" disabled="true" *ngIf="soldOut">Sold out!</button>
+</div>
+<div class="container" *ngIf="!event">
+  <img src="../../../assets/spinner.svg" alt="devil icon" class="spinner" />
 </div>

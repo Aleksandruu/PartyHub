@@ -77,19 +77,25 @@
       [ngClass]="{ 'wrong-input-value': passwordMissmatch }"
     />
   </div>
-  <p class="input-not-valid-text" *ngIf="passwordMissmatch">
-    Passwords do not match
+  <p
+    class="input-not-valid-text"
+    *ngIf="
+      (passwordMissmatch || registerForm.invalid) &&
+      registerForm.get('confirmPassword')!.touched
+    "
+  >
+    Passwords do not match!
   </p>
   <button
     *ngIf="!sent"
     class="btn"
     (click)="register()"
-    [disabled]="registerForm.invalid"
+    [disabled]="registerForm.invalid || passwordMissmatch"
   >
     Register
   </button>
   <p *ngIf="sent">
-    You will recive a confirmation <br />
+    You will receive a confirmation <br />
     email to activate your account!
   </p>
   <div>

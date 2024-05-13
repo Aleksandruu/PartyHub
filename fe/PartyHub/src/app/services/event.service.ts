@@ -93,10 +93,6 @@ export class EventService {
   }
 
   getTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(
-      enviroment.apiURL +
-        '/user/tickets/' +
-        localStorage.getItem(LOCALSTORAGEKEYS.EMAIL)
-    );
+    return this.http.get<Ticket[]>(enviroment.apiURL + '/user/tickets');
   }
 }

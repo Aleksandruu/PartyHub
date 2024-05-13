@@ -1,7 +1,8 @@
 export interface PaymentDetails {
   token: string;
+  eventId: string;
   tickets: number;
   userEmail: string;
-  referalEmail: string;
+  referralEmail: string;
   discountCode: string;
 }

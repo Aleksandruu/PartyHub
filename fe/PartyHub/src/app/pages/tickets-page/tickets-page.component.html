@@ -1,8 +1,19 @@
-<div class="container">
+<div class="container1" *ngIf="tickets">
   <app-ticket
     *ngFor="let ticket of tickets; let i = index"
     [ticket]="ticket"
     [index]="i"
+    (click)="showLargeQRCode(ticket)"
   >
   </app-ticket>
+</div>
+<div class="overlay" *ngIf="selectedTicket" (click)="closeQR()">
+  <div class="modal">
+    <qrcode [qrdata]="selectedTicket.ticketId"></qrcode>
+  </div>
+</div>
+
+<div class="container no-event" *ngIf="noTickets">
+  <p>You have no tickets yet!</p>
+  <p>Buy some and come back!</p>
 </div>

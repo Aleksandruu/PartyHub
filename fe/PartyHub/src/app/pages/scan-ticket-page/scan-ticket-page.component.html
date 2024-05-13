@@ -1,0 +1,39 @@
+<div class="container">
+  <ngx-scanner-qrcode
+    class="scanner"
+    #action="scanner"
+    [config]="config"
+    (event)="onEvent($event, action)"
+  ></ngx-scanner-qrcode>
+  <button
+    class="btn camera"
+    [class.btn-info]="!action.isStart"
+    [class.btn-warning]="action.isStart"
+    [disabled]="action.isLoading"
+    (click)="handle(action, action.isStart ? 'stop' : 'start')"
+  >
+    <img
+      [src]="
+        action.isStart
+          ? 'https://id1945.github.io/images/svg/camera-off.svg'
+          : 'https://id1945.github.io/images/svg/camera-on.svg'
+      "
+      width="30px"
+    />
+  </button>
+</div>
+<div *ngIf="valid" class="container ticket-valid validation">
+  <p class="scan-text">Your ticket has been validated!</p>
+  <button class="btn close-btn" (click)="goBackToScan()">Scan</button>
+</div>
+<div *ngIf="validationDate != null" class="container ticket-invalid validation">
+  <p class="scan-text">
+    This ticket is already scanned at <br />
+    {{ validationDate }}
+  </p>
+  <button class="btn close-btn" (click)="goBackToScan()">Scan</button>
+</div>
+<div *ngIf="notTicket" class="container is-not-ticket validation">
+  <p class="scan-text">This is not a PartyHub Ticket</p>
+  <button class="btn close-btn" (click)="goBackToScan()">Scan</button>
+</div>

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, ROUTES, Router } from '@angular/router';
@@ -13,6 +15,8 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { ApiResponse } from 'src/app/types/apiResponse.type';
 import { EventDetails } from 'src/app/types/event.type';
 import { PaymentDetails } from 'src/app/types/paymentDetails.type';
+import { MatIconModule } from '@angular/material/icon';
+import { EventPaymentDetails } from 'src/app/types/eventPaymentDetails.type';
 
 @Component({
   selector: 'app-checkout-page',
@@ -20,11 +24,13 @@ import { PaymentDetails } from 'src/app/types/paymentDetails.type';
   styleUrl: './checkout-page.component.css',
 })
 export class CheckoutPageComponent {
-  event!: EventDetails;
+  event!: EventPaymentDetails;
   id!: string;
   notFound = false;
   discount = 0;
   price = 0;
+  fewTickets = false;
+  loggedIn = false;
 
   ticketForm!: FormGroup;
   discountForm!: FormGroup;
@@ -42,29 +48,55 @@ export class CheckoutPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.email = localStorage.getItem(LOCALSTORAGEKEYS.EMAIL) || null;
-
+    const email = localStorage.getItem(LOCALSTORAGEKEYS.EMAIL) || null;
+    this.email = email;
+    if (email != null) {
+      this.loggedIn = true;
+    }
     this.route.params.subscribe((params) => {
       this.id = params['id'];
     });
 
-    this.eventService.getEvent(this.id).subscribe(
+    this.eventService.getEventPaymentDetails(this.id).subscribe(
       (event) => {
         this.event = event;
+        if (event.ticketsLeft <= (event.ticketsNumber * 20) / 100) {
+          this.fewTickets = true;
+        }
+        this.initForm();
       },
       (error) => {
         this.notFound = true;
       }
     );
+  }
 
+  initForm(): void {
     this.ticketForm = new FormGroup({
-      numberOfTickets: new FormControl(),
+      numberOfTickets: new FormControl(1, [
+        Validators.required,
+        this.positiveIntegerValidator(),
+        Validators.max(this.event.ticketsLeft),
+      ]),
       email: new FormControl(''),
     });
 
     this.discountForm = new FormGroup({
       discountCode: new FormControl(''),
     });
+  }
+
+  positiveIntegerValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (
+        isNaN(control.value) ||
+        control.value <= 0 ||
+        !Number.isInteger(control.value)
+      ) {
+        return { positiveInteger: true };
+      }
+      return null;
+    };
   }
 
   applyPartyCode() {
@@ -89,6 +121,12 @@ export class CheckoutPageComponent {
       });
   }
 
+  onTicketsNumberChange(): void {
+    if (this.discountForm.dirty) {
+      this.applyPartyCode();
+    }
+  }
+
   onSubmit(): void {
     if (this.email == null) {
       this.email = this.ticketForm.value.email;
@@ -98,15 +136,20 @@ export class CheckoutPageComponent {
       token: '',
       tickets: this.ticketForm.value.numberOfTickets,
       userEmail: this.email!,
-      referalEmail: this.referralEmail || '',
+      referralEmail: this.referralEmail || '',
       discountCode: this.appliedCode || '',
+      eventId: this.id,
     };
 
     this.paymentService.savePaymentDetails(payment);
     this.paymentService.savePaymentPrice(
       this.event.price * this.ticketForm.get('numberOfTickets')!.value -
-        this.discount
+        this.discount -
+        (this.event.price * this.event.discountForNextTicket) / 100
     );
     this.router.navigate([PATHS.PAYMENT]);
+  }
+  navigateToPromoCodeDetails(): void {
+    this.router.navigate([PATHS.PROMOCODEDETAILS]);
   }
 }

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { PATHS } from 'src/app/constants/paths';
 import { stripeConfig } from 'src/app/environments/environment.dev';
 import { PaymentService } from 'src/app/services/payment.service';
+import { ApiResponse } from 'src/app/types/apiResponse.type';
+
 
 declare var Stripe: any;
 
@@ -18,6 +20,7 @@ export class PaymentPageComponent implements OnInit {
   cardExpiry: any;
   cardCvc: any;
   priceToPay!: number;
+  paymentInProgress: boolean = false;
 
   constructor(private paymentService: PaymentService, private router: Router) { }
 
@@ -30,7 +33,6 @@ export class PaymentPageComponent implements OnInit {
       style: {
         base: {
           color: '#ffffff',
-          lineHeight: '30px',
           fontFamily: 'sans-serif',
           fontSize: '20px',
           '::placeholder': {
@@ -62,17 +64,43 @@ export class PaymentPageComponent implements OnInit {
   }
 
   async onSubmit() {
+    if (this.paymentInProgress) {
+      return;
+    }
+
+    this.paymentInProgress = true;
+
     try {
+
       const { token, error } = await this.stripe.createToken(this.cardNumber);
+
       if (error) {
         console.error(error.message);
         this.navigateToPaymentCancel();
-      } else {
-        console.log(token);
-        this.navigateToPaymentSucces();
+      }
+      else {
+        const payment = this.paymentService.getPaymentDetails();
+        payment!.token = token.id;
+
+        this.paymentService.savePaymentDetails(payment!);
+        this.paymentService.pay().subscribe(
+          (res) => {
+            if (res.success == true) {
+              this.navigateToPaymentSucces();
+            } else {
+              this.navigateToPaymentCancel();
+            }
+          },
+          (err) => {
+            this.navigateToPaymentCancel();
+          },
+          () => {
+            this.paymentInProgress = false;
+          }
+        );
       }
     } catch (error) {
-      console.error('An error occured:', error);
+      console.error('An error occurred:', error);
       this.navigateToPaymentCancel();
     }
   }

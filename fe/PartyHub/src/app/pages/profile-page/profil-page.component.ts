@@ -13,6 +13,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class ProfilPageComponent implements OnInit {
   profile!: Observable<Profile>;
+  popup = false;
 
   constructor(
     private profileService: ProfileService,
@@ -22,6 +23,10 @@ export class ProfilPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.profile = this.profileService.getProfile();
+  }
+
+  togglePopup(): void {
+    this.popup = !this.popup;
   }
 
   deleteAccount(): void {

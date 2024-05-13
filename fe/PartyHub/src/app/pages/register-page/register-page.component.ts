@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PATHS } from 'src/app/constants/paths';
 import { Register } from 'src/app/types/register.type';
@@ -18,7 +18,7 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private router: Router,
     private authentication: AuthenticationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -40,7 +40,16 @@ export class RegisterPageComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
       ]),
-    });
+    }, { validators: this.confirmPasswordValidator() });
+  }
+
+  confirmPasswordValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const password = control.get('password')?.value;
+      const confirmPassword = control.get('confirmPassword')?.value;
+
+      return password === confirmPassword ? null : { 'passwordMismatch': true };
+    };
   }
 
   navigateToLogin(): void {
@@ -52,6 +61,7 @@ export class RegisterPageComponent implements OnInit {
     let confirmPassword = this.registerForm.value.confirmPassword;
     this.sent = true;
     if (password == confirmPassword) {
+      this.passwordMissmatch = false;
       let register: Register = {
         email: this.registerForm.value.email,
         fullName: this.registerForm.value.fullName,

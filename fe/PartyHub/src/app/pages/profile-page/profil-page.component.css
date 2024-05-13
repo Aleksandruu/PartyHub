@@ -51,3 +51,32 @@
   width: 8rem;
   justify-content: space-between;
 }
+
+.delete-popup {
+  width: 300px;
+  position: fixed;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 2rem;
+  background-color: #1e1e1e;
+  border: 1px solid white;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.btn-container > .btn {
+  width: 100px;
+}

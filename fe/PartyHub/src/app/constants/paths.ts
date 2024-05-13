@@ -12,7 +12,6 @@ export const PATHS = {
   PROMOCODEDETAILS: 'promo-code-details',
   REGISTER: 'register',
   VERIFYACCOUNT: 'verify',
-  SCANTICKETS: 'scan-tickets',
   RESETPASSWORD: 'reset-password',
   EMAILFORRESET: 'enter-email',
   EVENTLIST: 'event-list',
@@ -21,7 +20,8 @@ export const PATHS = {
   PAYMENT: 'payment',
   PAYMENTCANCEL: 'payment-cancel',
   PAYMENTSUCCESS: 'payment-success',
-  TICKETSPAGE: 'tickets-page',
+  TICKETSPAGE: 'tickets',
+  SCAN: 'scan',
   TERMS: 'terms-and-conditions',
   POLICY: 'privacy-policy'
 };

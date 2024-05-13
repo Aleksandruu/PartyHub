@@ -19,6 +19,7 @@ export class EventPageComponent implements OnInit {
   id!: string;
   photoUrl!: SafeResourceUrl;
   notFound = false;
+  soldOut = false;
 
   constructor(
     private eventService: EventService,
@@ -35,6 +36,9 @@ export class EventPageComponent implements OnInit {
     this.eventService.getEvent(this.id).subscribe(
       (event) => {
         this.event = event;
+        if (this.event.ticketsLeft <= 0) {
+          this.soldOut = true;
+        }
         this.center = {
           lat: event.lat,
           lng: event.lng,

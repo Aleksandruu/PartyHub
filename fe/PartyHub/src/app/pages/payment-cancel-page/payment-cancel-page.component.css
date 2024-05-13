@@ -2,12 +2,12 @@ p {
   text-align: center;
 }
 
-.contact {
-  position: fixed;
-  bottom: 6rem;
-}
-
 img {
   height: 7rem;
   width: auto;
+}
+
+.contact {
+  position: fixed;
+  bottom: 8rem;
 }

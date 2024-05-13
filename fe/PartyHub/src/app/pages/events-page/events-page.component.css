@@ -3,6 +3,38 @@ button {
   bottom: 6rem;
 }
 .image {
+  max-width: 600px;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 165px);
+}
+
+.no-event {
+  font-size: 30px;
+  text-align: center;
+  text-wrap: wrap;
+  font-weight: 600;
+}
+
+.no-event > p {
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.no-event > img {
+  width: 100px;
+  margin-bottom: 2rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 100px;
+  animation: spin 2s linear infinite;
 }

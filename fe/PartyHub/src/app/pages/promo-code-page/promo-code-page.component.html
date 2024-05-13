@@ -1,4 +1,9 @@
-<form class="container" [formGroup]="promoCodeForm" id="confetti">
+<form
+  class="container"
+  *ngIf="loaded"
+  [formGroup]="promoCodeForm"
+  id="confetti"
+>
   <div class="present">
     <img
       src="../../../assets/top-box.svg"
@@ -16,12 +21,10 @@
       id="promoCodeInput"
       type="text"
       formControlName="promoCode"
-      [ngModel]="promoCode"
       [ngClass]="{
         'wrong-input-value':
           promoCodeForm.get('promoCode')!.invalid && promoCode
       }"
-      [disabled]="!promoCode"
     />
     <mat-icon class="copy-icon" (click)="copyToClipboard()"
       >content_copy</mat-icon
@@ -33,7 +36,7 @@
       promoCode && (promoCodeForm.get('promoCode')?.invalid || promoCode == '')
     "
   >
-    Party Code should be 5-9 characters long
+    Party Code should be 9 characters long
   </p>
   <button *ngIf="!promoCode" class="btn" (click)="generatePromoCode()">
     Generate code
@@ -42,6 +45,9 @@
     *ngIf="promoCode && open && !changed"
     class="btn"
     (click)="editPromoCode()"
+    [disabled]="
+      promoCode && (promoCodeForm.get('promoCode')?.invalid || promoCode == '')
+    "
   >
     Edit code
   </button>

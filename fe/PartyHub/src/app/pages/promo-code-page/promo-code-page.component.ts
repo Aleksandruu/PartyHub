@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { timeout } from 'rxjs';
 import { ProfileService } from 'src/app/services/profile.service';
-import party from "party-js";
+import party from 'party-js';
 
 @Component({
   selector: 'app-promo-code-page',
@@ -16,31 +16,47 @@ export class PromoCodePageComponent {
   invalid = false;
   open = false;
   changed = false;
-  constructor(private profileService: ProfileService, private elementRef: ElementRef) { }
+  loaded = false;
 
+  constructor(
+    private profileService: ProfileService,
+    private elementRef: ElementRef
+  ) {}
 
   ngOnInit() {
-    console.log(this.open);
+    this.profileService.getPromoCode().subscribe(
+      (x) => {
+        this.promoCode = x.message;
+        this.initForm();
+        this.loaded = true;
+        this.open = this.promoCode != '' && this.promoCode != null;
+        if (this.open) {
+          this.promoCodeForm.enable();
+        }
+      },
+      (err) => {
+        this.initForm();
+        this.loaded = true;
+      }
+    );
+  }
+
+  initForm(): void {
     this.promoCodeForm = new FormGroup({
-      promoCode: new FormControl(this.promoCode, [
+      promoCode: new FormControl({ value: this.promoCode, disabled: true }, [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(9),
         Validators.maxLength(9),
       ]),
     });
-    this.profileService.getPromoCode().subscribe((x) => {
-      this.promoCode = x.message;
-      this.open = this.promoCode != '' && this.promoCode != null;
-    });
   }
+
   generatePromoCode(): void {
     this.open = true;
-    this.profileService
-      .generatePromoCode()
-      .subscribe((x) => {
-        this.promoCode = x.message;
-        this.confetti();
-      });
+    this.profileService.generatePromoCode().subscribe((x) => {
+      this.promoCode = x.message;
+      this.confetti();
+    });
   }
   editPromoCode(): void {
     this.changed = true;
@@ -62,9 +78,10 @@ export class PromoCodePageComponent {
   }
 
   copyToClipboard(): void {
-    const inputElement = document.getElementById('promoCodeInput') as HTMLInputElement;
+    const inputElement = document.getElementById(
+      'promoCodeInput'
+    ) as HTMLInputElement;
     inputElement.select();
     document.execCommand('copy');
-
   }
 }

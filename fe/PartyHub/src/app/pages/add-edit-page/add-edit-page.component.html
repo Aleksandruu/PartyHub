@@ -1,4 +1,4 @@
-<form class="container" [formGroup]="addEventForm" (ngSubmit)="onSubmit(false)">
+<form class="container" [formGroup]="addEventForm" *ngIf="event">
   <div class="input-label">
     <label for="name">Name</label>
     <input
@@ -160,6 +160,11 @@
       }"
     />
   </div>
-  <button *ngIf="!submited" class="btn" type="submit">Add event</button>
+  <button *ngIf="!submited && !eventId" class="btn" (click)="onSubmit(false)">
+    Add event
+  </button>
+  <button *ngIf="!submited && eventId" class="btn" (click)="onSubmit(true)">
+    Edit event
+  </button>
   <p *ngIf="submited">Request submited!</p>
 </form>

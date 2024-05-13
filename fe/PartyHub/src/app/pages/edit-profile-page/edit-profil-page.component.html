@@ -7,11 +7,32 @@
       id="fullName"
       type="text"
       formControlName="fullName"
+      [ngClass]="{
+        'wrong-input-value':
+          editForm.get('fullName')!.invalid && editForm.get('fullName')!.touched
+      }"
     />
   </div>
   <div class="small-input-label">
     <label for="age">Age</label>
-    <input class="number-input" id="age" type="number" formControlName="age" />
+    <input
+      class="number-input"
+      id="age"
+      type="number"
+      formControlName="age"
+      [ngClass]="{
+        'wrong-input-value':
+          editForm.get('age')!.invalid && editForm.get('age')!.touched
+      }"
+    />
   </div>
-  <button class="btn" (click)="save()">Save</button>
+  <button
+    class="btn"
+    (click)="save()"
+    [disabled]="
+      editForm.get('fullName')!.invalid || editForm.get('age')!.invalid
+    "
+  >
+    Save
+  </button>
 </form>

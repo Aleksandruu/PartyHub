@@ -3,5 +3,4 @@ export interface Profile {
   email: string;
   age: number;
   promoCode: string;
-  discountForNextTicket: number;
 }

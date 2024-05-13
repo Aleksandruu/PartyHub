@@ -21,9 +21,6 @@ export class VerifyAccountPageComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.token = params['token'];
     });
-  }
-
-  verifyAccount(): void {
     this.authenticationService
       .verifyAccount(this.token)
       .subscribe(() => this.router.navigate([PATHS.LOGIN]));

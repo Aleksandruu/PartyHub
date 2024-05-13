@@ -1,5 +1,9 @@
 <div class="container" *ngIf="event">
-  <h1>Checkout</h1>
+  <h1 [ngClass]="{ fewTicketsMargin: !fewTickets }">Checkout</h1>
+  <h2 *ngIf="fewTickets">
+    Hurry up! <br />
+    Only a few tickets left
+  </h2>
   <form [formGroup]="ticketForm">
     <div class="input-label" *ngIf="!email">
       <label for="email">Email</label>
@@ -13,10 +17,16 @@
     <div class="small-input-label">
       <label for="tickets">Tickets</label>
       <input
+        (change)="onTicketsNumberChange()"
         id="tickets"
         type="number"
         class="number-input"
         formControlName="numberOfTickets"
+        [ngClass]="{
+          'wrong-input-value':
+            ticketForm.get('numberOfTickets')!.invalid &&
+            ticketForm.get('numberOfTickets')!.touched
+        }"
       />
     </div>
   </form>
@@ -32,6 +42,19 @@
       <button class="btn" (click)="applyPartyCode()">Apply</button>
     </div>
   </form>
+  <div class="discount-container" *ngIf="loggedIn">
+    <div class="discount-info">
+      <app-discount-bar
+        [discount]="event.discountForNextTicket"
+      ></app-discount-bar>
+      <mat-icon class="info-icon" (click)="navigateToPromoCodeDetails()"
+        >info</mat-icon
+      >
+    </div>
+    <p class="discount-text">
+      Discount for the next ticket: {{ event.discountForNextTicket }}%
+    </p>
+  </div>
   <div class="data-list">
     <div class="data-list-row">
       <p>Tickets value:</p>
@@ -44,10 +67,20 @@
     <div class="data-list-row total">
       <p>Total:</p>
       <p>
-        {{ event.price * ticketForm.get("numberOfTickets")!.value - discount }}
+        {{
+          event.price * ticketForm.get("numberOfTickets")!.value -
+            discount -
+            (event.discountForNextTicket * event.price) / 100
+        }}
         lei
       </p>
     </div>
   </div>
-  <button class="btn" (click)="onSubmit()">Pay now</button>
+  <button
+    class="btn"
+    (click)="onSubmit()"
+    [disabled]="ticketForm.get('numberOfTickets')!.invalid"
+  >
+    Pay now
+  </button>
 </div>

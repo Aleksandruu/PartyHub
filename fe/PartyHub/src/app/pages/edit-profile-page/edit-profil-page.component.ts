@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PATHS } from 'src/app/constants/paths';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -14,14 +14,14 @@ export class EditProfilPageComponent implements OnInit {
   editForm!: FormGroup;
   profile!: Profile;
 
-  constructor(private profileService: ProfileService, private router: Router) {}
+  constructor(private profileService: ProfileService, private router: Router) { }
 
   ngOnInit(): void {
     this.profileService.getProfile().subscribe((profile) => {
       this.profile = profile;
       this.editForm = new FormGroup({
-        fullName: new FormControl(profile.fullName),
-        age: new FormControl(profile.age),
+        fullName: new FormControl(profile.fullName, [Validators.minLength(5)]),
+        age: new FormControl(profile.age, [Validators.min(18)])
       });
     });
   }

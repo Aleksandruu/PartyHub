@@ -1,16 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 body {
   margin: 0;
-}
-html,
-body {
   height: 100%;
-}
-body {
-  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-body {
   background-color: #1e1e1e; /* Schimbă această valoare cu culoarea dorită */
   /* Alte stiluri pentru body sau pentru clasă/containerul principal al aplicației */
 }
@@ -37,7 +29,7 @@ label {
   align-items: center;
   flex-direction: column;
   width: 100vw;
-  height: calc(100vh - 190px);
+  height: calc(100vh - 165px);
   font-weight: 500;
   font-size: medium;
 }
@@ -96,6 +88,11 @@ label {
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 20px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .input-label {

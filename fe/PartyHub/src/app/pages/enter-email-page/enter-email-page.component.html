@@ -2,10 +2,26 @@
   <img src="../../../assets/devil.svg" />
   <h1 class="title">Reset password</h1>
   <div class="input-label">
-    <label for="password">Email</label>
-    <input class="text-input" id="email" type="email" formControlName="email" />
+    <label for="email">Email</label>
+    <input
+      class="text-input"
+      id="email"
+      type="email"
+      formControlName="email"
+      [ngClass]="{
+        'wrong-input-value':
+          emailForm.get('email')!.invalid && emailForm.get('email')!.touched
+      }"
+    />
   </div>
-  <button *ngIf="!sent" class="btn" (click)="sendEmail()">Send</button>
+  <button
+    *ngIf="!sent"
+    class="btn"
+    (click)="sendEmail()"
+    [disabled]="emailForm.get('email')!.invalid"
+  >
+    Send
+  </button>
   <p *ngIf="sent">
     An email has been sent to your<br />
     email address!

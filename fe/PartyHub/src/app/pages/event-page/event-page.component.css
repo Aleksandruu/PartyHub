@@ -2,6 +2,10 @@
   height: auto;
 }
 
+.container > * {
+  max-width: 600px;
+}
+
 .banner-sec {
   width: 100vw;
   height: 265px;
@@ -21,12 +25,13 @@ h2 {
 .why {
   margin-bottom: 1rem;
   margin-top: 2rem;
+  padding-left: 2.5rem;
 }
 
 .small-data {
   font-size: 20px;
   font-weight: 400;
-  width: 70vw;
+  width: 2rem;
   padding-left: 3.5rem;
   margin-bottom: 1rem;
 }
@@ -37,6 +42,7 @@ h2 {
   width: 80vw;
   margin: 0;
   margin-bottom: 2rem;
+  padding-left: 2.5rem;
 }
 
 .icon-title {
@@ -93,4 +99,18 @@ google-map,
 
 google-map {
   filter: grayscale(100%) invert(100%);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 100px;
+  animation: spin 2s linear infinite;
 }
