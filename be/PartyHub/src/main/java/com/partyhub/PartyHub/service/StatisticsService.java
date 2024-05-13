@@ -4,7 +4,7 @@ import com.partyhub.PartyHub.entities.Statistics;
 
 import java.util.UUID;
 public interface StatisticsService {
-    Statistics getStatisticsByEventId(UUID eventId);
+     Statistics getStatisticsByEventId(UUID eventId);
     Statistics save(Statistics statistics);
 
 }

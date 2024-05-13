@@ -32,12 +32,14 @@ public class Event {
     private LocalDate date;
     private String details;
     private float price;
-    private float discount;
+    private int discount;
     private int ticketsNumber;
     private int ticketsLeft = this.ticketsNumber;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "statistics_id", referencedColumnName = "id")
+    @JoinColumn(name = "statistics_id", referencedColumnName = "id") // This column will store the FK to Statistics
     private Statistics statistics;
     @OneToMany(mappedBy = "event")
     private List<Ticket> tickets;
+    @OneToMany(mappedBy = "event")
+    private List<DiscountForNextTicket> discountsForNextTicket;
 }

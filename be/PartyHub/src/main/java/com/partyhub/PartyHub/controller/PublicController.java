@@ -78,8 +78,8 @@ public class PublicController {
                 if (ValidationUtils.isValidPromoCode(code)){
                     User user = userService.findByPromoCode(code);
 
-                    String email = user.getEmail();
-                    return new ResponseEntity<>(new ApiResponse(true, email), HttpStatus.OK);
+                        String email = user.getEmail();
+                        return new ResponseEntity<>(new ApiResponse(true, email), HttpStatus.OK);
                 }
             } else if (code.length() == 10) {
                 try {

@@ -65,6 +65,8 @@ public class ProfileServiceImpl implements ProfileService {
     public void resetPassword(String email, String newPassword) {
         User user = userService.findByEmail(email);
 
+        System.out.println(newPassword);
+
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
 
