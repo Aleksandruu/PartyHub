@@ -88,6 +88,16 @@ export class NavbarComponent {
     this.closeNavbar();
   }
 
+  navigateToTermsAndConds(): void {
+    this.router.navigate([PATHS.TERMS]);
+    this.closeNavbar();
+  }
+
+  navigateToPrivacyPolicy(): void {
+    this.router.navigate([PATHS.POLICY]);
+    this.closeNavbar();
+  }
+
   closeNavbar(): void {
     this.navbarExtend = false;
   }

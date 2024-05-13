@@ -53,7 +53,7 @@
 }
 
 .menu-extended {
-  max-height: 300px;
+  max-height: 400px;
   transition: max-height 0.3s ease-in;
 }
 

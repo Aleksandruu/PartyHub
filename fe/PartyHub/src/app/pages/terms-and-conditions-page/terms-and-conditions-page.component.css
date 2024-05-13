@@ -1,0 +1,20 @@
+p {
+  padding: 1rem;
+}
+
+h3 {
+  text-align: left;
+  margin: 2rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+.container {
+  height: auto;
+}
+
+img {
+  padding: 1rem;
+}
