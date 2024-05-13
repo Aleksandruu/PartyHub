@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TicketRepository extends JpaRepository<Ticket, UUID> {
-    void deleteByEventId(UUID eventId);
-
     List<Ticket> findByEmail(String email);
+    void deleteByEventId(UUID eventId);
 }

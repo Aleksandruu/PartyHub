@@ -25,4 +25,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         return statisticsRepository.save(statistics);
     }
 
-}
+    }
+
+
+

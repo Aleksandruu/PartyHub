@@ -88,9 +88,6 @@ label {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    position: fixed;
-    top: 0;
-    left: 0;
 }
 
 .footer{
@@ -105,15 +102,4 @@ label {
     color: slategrey;
     font-size: 22px;
     font-weight:700 ;
-}
-p, h1, h2, h3{
-    color: white;
-}
-.filler{
-    width: 100vw;
-    height: 95px;
-}
-
-.cnt{
-    height: auto;
 }

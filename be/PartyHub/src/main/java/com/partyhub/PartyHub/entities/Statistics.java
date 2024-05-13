@@ -25,4 +25,5 @@ public class Statistics {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
+
 }
